@@ -166,3 +166,9 @@ A demonstração usa organização visual inspirada no Trilha Apostólica, mante
 A demonstração reúne empresas e pessoas na tela Clientes. Ao cadastrar um cliente, adicione líderes e funcionários no mesmo formulário, com nome, e-mail obrigatório, função e unidade/equipe opcional. O cadastro pode ser editado e não aceita e-mails repetidos dentro do mesmo cliente.
 
 Antes do preenchimento, selecione o cliente e a pessoa responsável. O registro guarda uma cópia do nome e e-mail da pessoa para manter sua identificação mesmo após edições cadastrais. Na demonstração, esses vínculos não criam usuários, convites ou acesso privado. Autenticação real continua fora do escopo desta versão sem banco.
+
+## Dashboard por cliente
+
+A tela Clientes e os cartões da Visão geral abrem um painel dedicado por cliente. O painel mostra totais de diários, concluídos, rascunhos e pessoas que preencheram, além da tabela com questionário, nome e e-mail do responsável, data e situação. Permite filtrar por pessoa, questionário, status e período (datas em Brasília), consultar respostas e iniciar outro diário já vinculado ao cliente.
+
+Cada registro guarda identificadores do cliente e da pessoa, data ISO de atualização e data de conclusão. O painel usa os IDs para separar os registros, inclusive quando dois clientes têm pessoas com o mesmo nome ou e-mail. Os nomes e e-mails exibidos nos registros preservam sua identificação histórica. O painel usa somente os registros temporários da sessão da demonstração e não implementa acesso privado.

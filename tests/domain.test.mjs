@@ -94,3 +94,61 @@ test("cliente rejeita e-mails repetidos após normalização", () => {
     "",
   );
 });
+
+const { clientDiaries } = await import("../lib/client-dashboard.ts");
+const record = (id, clientId, personId, complete, updatedAt) => ({
+  id,
+  clientId,
+  personId,
+  complete,
+  updatedAt,
+  completedAt: complete ? updatedAt : null,
+  personName: "Pessoa",
+  personEmail: "pessoa@exemplo.com",
+  date: "data exibida",
+  model: { id: "modelo", name: "Diário", frequency: "daily" },
+});
+test("dashboard separa clientes por ID e ordena os mais recentes primeiro", () => {
+  const rows = [
+    record("a", "cliente-a", "1", true, "2026-11-04T12:00Z"),
+    record("b", "cliente-b", "1", true, "2026-11-04T15:00Z"),
+    record("c", "cliente-a", "2", false, "2026-11-04T14:00Z"),
+  ];
+  assert.deepEqual(
+    clientDiaries(rows, "cliente-a").map((r) => r.id),
+    ["c", "a"],
+  );
+  assert.deepEqual(
+    clientDiaries(rows, "cliente-b").map((r) => r.id),
+    ["b"],
+  );
+  assert.deepEqual(clientDiaries(rows, "inexistente"), []);
+  assert.equal(
+    clientDiaries(rows, "cliente-a", { status: "completed", person: "1" })
+      .length,
+    1,
+  );
+  assert.equal(
+    clientDiaries(rows, "cliente-a", { status: "completed", person: "2" })
+      .length,
+    0,
+  );
+});
+test("dashboard filtra por data no fuso de Brasília e por modelo", () => {
+  const rows = [
+    record("a", "cliente-a", "1", true, "2026-11-05T01:00Z"),
+    record("b", "cliente-a", "1", false, "2026-11-05T04:00Z"),
+  ];
+  assert.deepEqual(
+    clientDiaries(rows, "cliente-a", {
+      from: "2026-11-04",
+      to: "2026-11-04",
+    }).map((r) => r.id),
+    ["a"],
+  );
+  assert.deepEqual(clientDiaries(rows, "cliente-a", { model: "outro" }), []);
+  assert.deepEqual(
+    clientDiaries(rows, "cliente-a", { status: "draft" }).map((r) => r.id),
+    ["b"],
+  );
+});

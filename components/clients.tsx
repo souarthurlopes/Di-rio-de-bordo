@@ -20,10 +20,12 @@ export function Clients({
   clients,
   onSave,
   onDiary,
+  onDashboard,
 }: {
   clients: Client[];
   onSave: (client: Client) => void;
   onDiary: (client: Client) => void;
+  onDashboard: (client: Client) => void;
 }) {
   const [editing, setEditing] = useState<string | null>(null),
     [name, setName] = useState(""),
@@ -87,9 +89,17 @@ export function Clients({
                   </div>
                 ))}
               </div>
-              <button className="text-action" onClick={() => onDiary(c)}>
-                Vincular diário a uma pessoa <ArrowRight size={14} />
-              </button>
+              <div className="row">
+                <button
+                  className="btn secondary"
+                  onClick={() => onDashboard(c)}
+                >
+                  Ver dashboard do cliente <ArrowRight size={14} />
+                </button>
+                <button className="text-action" onClick={() => onDiary(c)}>
+                  Vincular diário a uma pessoa <ArrowRight size={14} />
+                </button>
+              </div>
             </article>
           ))
         ) : (

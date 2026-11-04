@@ -16,6 +16,7 @@ import {
 import originals from "../lib/diary-models.json";
 import { type Field } from "../lib/domain";
 import { DiaryFlow } from "./diary-flow";
+import { ClientDashboard } from "./client-dashboard";
 import { Clients } from "./clients";
 import type { Client } from "../lib/clients";
 import { validateDemo } from "../lib/demo";
@@ -26,6 +27,8 @@ type RecordItem = {
   values: Record<string, unknown>;
   complete: boolean;
   date: string;
+  updatedAt: string;
+  completedAt: string | null;
   clientId: string;
   personId: string;
   clientName: string;
@@ -50,10 +53,16 @@ const screens = [
   { id: "diary", name: "Diários de bordo", icon: ClipboardCheck },
   { id: "history", name: "Registros", icon: BookOpen },
   { id: "clients", name: "Clientes", icon: Building2 },
+  {
+    id: "client-dashboard",
+    name: "Dashboard do cliente",
+    icon: LayoutDashboard,
+  },
   { id: "models", name: "Questionários", icon: Plus },
   { id: "incidents", name: "Ocorrências", icon: TriangleAlert },
 ];
 export default function DemoApp() {
+  const [dashboardClientId, setDashboardClientId] = useState("");
   const [flowKey, setFlowKey] = useState(0);
   const [view, setView] = useState("dashboard"),
     [clients, setClients] = useState<Client[]>([]),
@@ -78,6 +87,15 @@ export default function DemoApp() {
   function go(id: string) {
     setView(id);
     setMessage("");
+  }
+  function openClientDashboard(id: string) {
+    setDashboardClientId(id);
+    go("client-dashboard");
+  }
+  function startForClient(id: string) {
+    start();
+    setAssignedClient(id);
+    setAssignedPerson("");
   }
   function start() {
     setAssignmentReady(false);
@@ -105,6 +123,8 @@ export default function DemoApp() {
       values: structuredClone(values),
       complete,
       date: new Date().toLocaleString("pt-BR"),
+      updatedAt: new Date().toISOString(),
+      completedAt: complete ? new Date().toISOString() : null,
       clientId: client.id,
       personId: person.id,
       clientName: client.name,
@@ -146,16 +166,24 @@ export default function DemoApp() {
         </div>
         <div className="nav-section-label">ESPAÇO DE GESTÃO</div>
         <nav className="stack">
-          {screens.map((s) => (
-            <button
-              key={s.id}
-              className={"navitem " + (view === s.id ? "active" : "")}
-              onClick={() => go(s.id)}
-            >
-              <s.icon size={18} />
-              <span className="navtext">{s.name}</span>
-            </button>
-          ))}
+          {screens
+            .filter((s) => s.id !== "client-dashboard")
+            .map((s) => (
+              <button
+                key={s.id}
+                className={
+                  "navitem " +
+                  (view === s.id ||
+                  (view === "client-dashboard" && s.id === "clients")
+                    ? "active"
+                    : "")
+                }
+                onClick={() => go(s.id)}
+              >
+                <s.icon size={18} />
+                <span className="navtext">{s.name}</span>
+              </button>
+            ))}
         </nav>
         <div className="sidefooter">
           Demonstração sem banco
@@ -191,7 +219,7 @@ export default function DemoApp() {
                   : "Uma visão clara das suas equipes, rotinas e próximos passos."}
               </p>
             </div>
-            {view !== "diary" && (
+            {view !== "diary" && view !== "client-dashboard" && (
               <button className="btn" onClick={start}>
                 <Plus size={16} /> Preencher diário
               </button>
@@ -261,6 +289,54 @@ export default function DemoApp() {
                   );
                 })}
               </div>
+              <section className="overview-panel">
+                <div className="overview-panel-heading">
+                  <h2>Acompanhamento por cliente</h2>
+                  <button onClick={() => go("clients")}>
+                    Gerenciar clientes <ArrowRight size={14} />
+                  </button>
+                </div>
+                {clients.length ? (
+                  <div className="client-dashboard-cards">
+                    {clients.map((c) => {
+                      const own = records.filter((r) => r.clientId === c.id);
+                      return (
+                        <button
+                          key={c.id}
+                          className="client-dashboard-card"
+                          onClick={() => openClientDashboard(c.id)}
+                        >
+                          <span className="next-step-icon">
+                            <Building2 size={20} />
+                          </span>
+                          <strong>{c.name}</strong>
+                          <small>
+                            {own.filter((r) => r.complete).length} concluído(s)
+                            · {own.filter((r) => !r.complete).length}{" "}
+                            rascunho(s)
+                          </small>
+                          <span>
+                            Ver dashboard <ArrowRight size={14} />
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className="calm-empty">
+                    <p>
+                      Cadastre um cliente para acompanhar os diários preenchidos
+                      por sua equipe.
+                    </p>
+                    <button
+                      className="btn secondary"
+                      onClick={() => go("clients")}
+                    >
+                      Cadastrar cliente
+                    </button>
+                  </div>
+                )}
+              </section>
               <div className="dashboard-columns">
                 <section className="overview-panel">
                   <div className="overview-panel-heading">
@@ -402,6 +478,21 @@ export default function DemoApp() {
               </section>
             </div>
           )}
+          {view === "client-dashboard" && (
+            <ClientDashboard
+              key={dashboardClientId}
+              clients={clients}
+              clientId={dashboardClientId}
+              records={records}
+              onSelect={setDashboardClientId}
+              onOpen={(id) => {
+                const record = records.find((r) => r.id === id);
+                if (record) open(record);
+              }}
+              onClients={() => go("clients")}
+              onNew={startForClient}
+            />
+          )}
           {view === "diary" &&
             (!assignmentReady ? (
               <section className="card stack">
@@ -437,6 +528,7 @@ export default function DemoApp() {
                         <select
                           required
                           className="input"
+                          aria-label="Cliente"
                           value={assignedClient}
                           onChange={(e) => {
                             setAssignedClient(e.target.value);
@@ -456,6 +548,7 @@ export default function DemoApp() {
                         <select
                           required
                           className="input"
+                          aria-label="Pessoa responsável"
                           value={assignedPerson}
                           onChange={(e) => setAssignedPerson(e.target.value)}
                         >
@@ -488,6 +581,14 @@ export default function DemoApp() {
                     {current?.personName || person?.name}
                   </span>
                   <span>{current?.personEmail || person?.email}</span>
+                  <button
+                    className="text-action"
+                    onClick={() =>
+                      openClientDashboard(current?.clientId || assignedClient)
+                    }
+                  >
+                    Voltar ao dashboard do cliente <ArrowRight size={14} />
+                  </button>
                 </div>
                 <DiaryFlow
                   key={flowKey}
@@ -536,6 +637,7 @@ export default function DemoApp() {
           {view === "clients" && (
             <Clients
               clients={clients}
+              onDashboard={(c) => openClientDashboard(c.id)}
               onSave={(c) => {
                 setClients((a) => [...a.filter((x) => x.id !== c.id), c]);
                 setMessage("Cliente e pessoas salvos nesta sessão.");
