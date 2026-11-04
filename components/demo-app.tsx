@@ -50,7 +50,7 @@ const screens = [
   { id: "diary", name: "Diários de bordo", icon: ClipboardCheck },
   { id: "history", name: "Registros", icon: BookOpen },
   { id: "clients", name: "Clientes", icon: Building2 },
-  { id: "models", name: "Modelos de diário", icon: Plus },
+  { id: "models", name: "Questionários", icon: Plus },
   { id: "incidents", name: "Ocorrências", icon: TriangleAlert },
 ];
 export default function DemoApp() {
@@ -549,7 +549,45 @@ export default function DemoApp() {
           )}
           {view === "models" && (
             <section className="card stack">
-              <h2>Criar modelo de diário</h2>
+              <h2>Construtor de questionários</h2>
+              <p className="muted">
+                Use os questionários diário, semanal e mensal como base ou crie
+                um novo. As perguntas originais serão preservadas na cópia.
+              </p>
+              <label className="field">
+                Usar questionário como base
+                <select
+                  className="input"
+                  defaultValue=""
+                  onChange={(e) => {
+                    const base = models.find((m) => m.id === e.target.value);
+                    if (!base) {
+                      setFields([]);
+                      setModelName("");
+                      setFrequency("daily");
+                      return;
+                    }
+                    setModelName(base.name + " — personalizado");
+                    setFrequency(base.frequency);
+                    setFields(
+                      base.fields.map((f) => ({
+                        ...structuredClone(f),
+                        id: crypto.randomUUID(),
+                      })),
+                    );
+                    setMessage(
+                      "Cópia carregada. Personalize as perguntas e crie seu questionário; o original permanece disponível.",
+                    );
+                  }}
+                >
+                  <option value="">Começar em branco</option>
+                  {models.map((m) => (
+                    <option key={m.id} value={m.id}>
+                      {m.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
               <form
                 className="stack"
                 onSubmit={(e) => {
@@ -731,7 +769,7 @@ export default function DemoApp() {
                     Adicionar pergunta
                   </button>
                   <button className="btn" disabled={!fields.length}>
-                    Criar modelo
+                    Criar questionário
                   </button>
                 </div>
               </form>

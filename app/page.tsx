@@ -1,4 +1,4 @@
-import OriginalDiary from "../components/original-diary";
+import DemoApp from "../components/demo-app";
 export default function Home() {
-  return <OriginalDiary />;
+  return <DemoApp />;
 }

@@ -1,10 +1,8 @@
 # Diário de Bordo
 
-## Versão atual: somente os formulários
+## Escopo atual
 
-A página inicial apresenta apenas os formulários originais diário, semanal e mensal, com checklists e campos de texto e indicadores. Não há marca de empresa, painel, cadastros, construtor, login ou banco. O preenchimento é temporário e pode ser impresso ou salvo em PDF pelo navegador. As três frequências mantêm suas respostas separadas enquanto a aba estiver aberta.
-
-O código de desenvolvimento anterior foi preservado no repositório para referência; ele não é exibido pela página inicial. As instruções abaixo registram etapas anteriores do projeto.
+Painel, cadastro unificado de Clientes e suas pessoas responsáveis, registros, ocorrências e construtor de questionários. Os formulários originais diário, semanal e mensal são a base de perguntas e podem ser copiados no construtor para personalização. Não há associação visual ou textual com marca de empresa. A demonstração permanece sem banco, login ou acesso privado real; os dados ficam somente na memória da aba.
 
 # Diário de Bordo — v0.3
 
@@ -14,9 +12,9 @@ A página inicial agora abre diretamente a demonstração, sem conta, login, var
 
 **Os dados ficam apenas em memória e desaparecem ao atualizar ou fechar a aba.** Não há localStorage, gravação no servidor, envio de convites, autenticação ou compartilhamento entre aparelhos. Use somente informações de teste. A interface identifica claramente esse modo.
 
-Para publicar a demonstração na Vercel: importe este repositório como Next.js, raiz do repositório, Node 24, npm ci e npm run build. Nenhuma variável é necessária. Se NEXT_PUBLIC_APP_MODE estiver configurada como connected, remova-a ou mude para demo e faça Redeploy.
+Para publicar a demonstração na Vercel: importe este repositório como Next.js, raiz do repositório, Node 24, npm ci e npm run build. Nenhuma variável é necessária. A página inicial não exige nenhuma variável de ambiente.
 
-O código anterior com banco e suas migrations foi preservado em components/connected-app.tsx. Só é ativado explicitamente com NEXT_PUBLIC_APP_MODE=connected e as variáveis do Supabase. As seções de configuração de banco abaixo são opcionais e não se aplicam à demonstração.
+O código anterior com banco e suas migrations foi preservado em components/connected-app.tsx como referência. A página inicial usa a demonstração sem banco. As seções de configuração de banco abaixo são opcionais e não se aplicam à demonstração.
 
 
 
