@@ -4,7 +4,7 @@
     "template_id": "29cf3f81-4723-48ef-980f-242e79f8e432",
     "company_id": null,
     "version": 1,
-    "template_name": "VELO • Acompanhamento diário",
+    "template_name": "Diário de bordo diário",
     "description": "",
     "frequency": "daily",
     "fields": [
@@ -67,7 +67,7 @@
       {
         "id": "a54b431c-1582-4848-8dfd-52ca8dc86863",
         "type": "boolean",
-        "label": "Garantir cumprimento dos processos internos e do padrão VELO.",
+        "label": "Garantir cumprimento dos processos internos e do padrão de qualidade.",
         "options": [],
         "category": "Operação e estrutura",
         "required": false
@@ -155,7 +155,7 @@
     ],
     "created_at": "2026-11-03T16:26:29.533Z",
     "templates": {
-      "name": "VELO • Acompanhamento diário"
+      "name": "Diário de bordo diário"
     }
   },
   {
@@ -163,7 +163,7 @@
     "template_id": "1170b0d0-c27c-41b7-8e63-4560bd3edb85",
     "company_id": null,
     "version": 1,
-    "template_name": "VELO • Fechamento mensal",
+    "template_name": "Diário de bordo mensal",
     "description": "",
     "frequency": "monthly",
     "fields": [
@@ -314,7 +314,7 @@
     ],
     "created_at": "2026-11-03T16:26:29.533Z",
     "templates": {
-      "name": "VELO • Fechamento mensal"
+      "name": "Diário de bordo mensal"
     }
   },
   {
@@ -322,7 +322,7 @@
     "template_id": "f92b373c-0c15-4fb8-8dfc-f253ab9b7be8",
     "company_id": null,
     "version": 1,
-    "template_name": "VELO • Acompanhamento semanal",
+    "template_name": "Diário de bordo semanal",
     "description": "",
     "frequency": "weekly",
     "fields": [
@@ -457,7 +457,7 @@
     ],
     "created_at": "2026-11-03T16:26:29.533Z",
     "templates": {
-      "name": "VELO • Acompanhamento semanal"
+      "name": "Diário de bordo semanal"
     }
   }
 ]

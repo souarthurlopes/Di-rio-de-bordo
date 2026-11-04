@@ -83,8 +83,8 @@ export function Builder({
     <section className="card stack">
       <h2>Construtor de modelos</h2>
       <p className="muted">
-        Carregue uma versão para editar. Modelos globais da VELO são copiados
-        para a empresa. A publicação cria uma nova versão, sem alterar respostas
+        Carregue uma versão para editar. Modelos de referência são copiados para
+        a empresa. A publicação cria uma nova versão, sem alterar respostas
         anteriores.
       </p>
       <label className="field">

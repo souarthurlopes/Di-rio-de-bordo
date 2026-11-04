@@ -1,7 +1,7 @@
--- Modelos globais de referência extraídos do Diário de Bordo do Líder VELO Pampulha.
+-- Modelos globais de referência para acompanhamento diário, semanal e mensal.
 -- Execute após schema.sql. O modelo pode ser usado por empresas diferentes sem compartilhar registros.
 do $$ declare t uuid; s uuid; begin
-insert into public.templates(cadence,name) values('daily','VELO • Acompanhamento diário') returning id into t;
+insert into public.templates(cadence,name) values('daily','Diário de bordo diário') returning id into t;
 insert into public.sections(template_id,title,position) values(t,'Pessoas e atendimento',0) returning id into s;
 insert into public.items(section_id,title,position) values(s,'Conferir presença da equipe, cobertura das escalas e necessidade de freelancer.',0);
 insert into public.items(section_id,title,position) values(s,'Acompanhar recepção, check-ins, cadastros e qualidade do atendimento.',1);
@@ -11,12 +11,12 @@ insert into public.sections(template_id,title,position) values(t,'Operação e e
 insert into public.items(section_id,title,position) values(s,'Verificar funcionamento das salas, organização e limpeza da unidade.',0);
 insert into public.items(section_id,title,position) values(s,'Acompanhar manutenção, materiais, estoque e saída de produtos.',1);
 insert into public.items(section_id,title,position) values(s,'Conferir ocorrências operacionais, caixa e demandas urgentes.',2);
-insert into public.items(section_id,title,position) values(s,'Garantir cumprimento dos processos internos e do padrão VELO.',3);
+insert into public.items(section_id,title,position) values(s,'Garantir cumprimento dos processos internos e do padrão de qualidade.',3);
 insert into public.sections(template_id,title,position) values(t,'Comercial e indicadores',2) returning id into s;
 insert into public.items(section_id,title,position) values(s,'Acompanhar vendas, atendimentos e metas do dia.',0);
 insert into public.items(section_id,title,position) values(s,'Atualizar painel / dashboard e identificar desvios.',1);
 insert into public.items(section_id,title,position) values(s,'Acompanhar campanhas e oportunidades de retenção.',2);
-insert into public.templates(cadence,name) values('weekly','VELO • Acompanhamento semanal') returning id into t;
+insert into public.templates(cadence,name) values('weekly','Diário de bordo semanal') returning id into t;
 insert into public.sections(template_id,title,position) values(t,'Gestão de pessoas',0) returning id into s;
 insert into public.items(section_id,title,position) values(s,'Realizar reunião semanal de alinhamento e encontros individuais (1:1).',0);
 insert into public.items(section_id,title,position) values(s,'Acompanhar desempenho, feedbacks, integração e desenvolvimento da equipe.',1);
@@ -31,7 +31,7 @@ insert into public.items(section_id,title,position) values(s,'Consolidar vendas,
 insert into public.items(section_id,title,position) values(s,'Avaliar reclamações, retenção e qualidade da experiência dos alunos.',1);
 insert into public.items(section_id,title,position) values(s,'Acompanhar campanhas, eventos e ações de marketing previstas.',2);
 insert into public.items(section_id,title,position) values(s,'Reportar resultados, riscos e decisões necessárias aos sócios.',3);
-insert into public.templates(cadence,name) values('monthly','VELO • Fechamento mensal') returning id into t;
+insert into public.templates(cadence,name) values('monthly','Diário de bordo mensal') returning id into t;
 insert into public.sections(template_id,title,position) values(t,'Pessoas e processos',0) returning id into s;
 insert into public.items(section_id,title,position) values(s,'Avaliar indicadores individuais, desempenho e evolução dos colaboradores.',0);
 insert into public.items(section_id,title,position) values(s,'Revisar necessidades de treinamento, integração e desenvolvimento.',1);

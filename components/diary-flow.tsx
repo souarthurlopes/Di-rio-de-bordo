@@ -109,7 +109,7 @@ export function DiaryFlow({
                 <span className="section-kicker">
                   {cadence[m.frequency] || "Personalizado"}
                 </span>
-                <strong>{m.name.replace("VELO • ", "")}</strong>
+                <strong>{m.name}</strong>
                 <p>
                   {new Set(m.fields.map((f) => f.category)).size} categorias ·{" "}
                   {m.fields.length} perguntas
@@ -124,8 +124,8 @@ export function DiaryFlow({
         <div className="flow-note">
           <BookOpen size={17} />
           <span>
-            Os modelos VELO são referências do projeto. Seus preenchimentos
-            ficam disponíveis somente nesta sessão.
+            Escolha o diário adequado à sua rotina. Seus preenchimentos ficam
+            disponíveis somente nesta sessão.
           </span>
         </div>
       </div>
@@ -134,7 +134,7 @@ export function DiaryFlow({
     <div className="flow-shell">
       <aside className="flow-outline">
         <span className="section-kicker">{cadence[model.frequency]}</span>
-        <h2>{model.name.replace("VELO • ", "")}</h2>
+        <h2>{model.name}</h2>
         <p>
           {completed} de {model.fields.length} respostas
         </p>

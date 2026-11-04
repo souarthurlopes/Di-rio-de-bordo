@@ -281,7 +281,7 @@ export default function DemoApp() {
                           </span>
                           <span>
                             <strong>Continuar diário</strong>
-                            <small>{r.model.name.replace("VELO • ", "")}</small>
+                            <small>{r.model.name}</small>
                           </span>
                           <ArrowRight size={17} />
                         </button>
@@ -364,7 +364,7 @@ export default function DemoApp() {
                       <tbody>
                         {records.slice(0, 5).map((r) => (
                           <tr key={r.id}>
-                            <td>{r.model.name.replace("VELO • ", "")}</td>
+                            <td>{r.model.name}</td>
                             <td>
                               {r.personName}
                               <small className="person-email">

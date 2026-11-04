@@ -472,7 +472,7 @@ export default function Home() {
                 minLength={2}
                 value={companyName}
                 onChange={(e) => setCompanyName(e.target.value)}
-                placeholder="Ex.: VELO BH"
+                placeholder="Nome do cliente"
               />
             </label>
             <label className="field">

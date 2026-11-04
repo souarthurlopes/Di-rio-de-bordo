@@ -2,7 +2,7 @@
 
 ## Modo demonstração sem banco (padrão)
 
-A página inicial agora abre diretamente a demonstração, sem conta, login, variáveis de ambiente ou Supabase. Ela permite navegar, preencher os três formulários VELO, criar modelos temporários, simular empresas/unidades/líderes/ocorrências e consultar rascunhos ou registros finalizados da sessão.
+A página inicial agora abre diretamente a demonstração, sem conta, login, variáveis de ambiente ou Supabase. Ela permite navegar, preencher os três formulários de diário de bordo, criar modelos temporários, simular empresas/unidades/líderes/ocorrências e consultar rascunhos ou registros finalizados da sessão.
 
 **Os dados ficam apenas em memória e desaparecem ao atualizar ou fechar a aba.** Não há localStorage, gravação no servidor, envio de convites, autenticação ou compartilhamento entre aparelhos. Use somente informações de teste. A interface identifica claramente esse modo.
 
@@ -14,7 +14,7 @@ O código anterior com banco e suas migrations foi preservado em components/conn
 
 Continuação do projeto enviado em diario-de-bordo-saas-v02.zip. Este repositório contém o sistema completo. Use sua raiz como Root Directory na Vercel. O README original está em README-v02-original.md.
 
-Plataforma independente: VELO Pampulha é uma referência de formulário, não a marca do produto.
+Plataforma independente de acompanhamento de líderes.
 
 ## Stack e execução
 
@@ -65,7 +65,7 @@ Perfis preservados do banco original:
 2. Em Líderes, gere convite para o e-mail e perfil desejados. Para líderes, selecione a unidade.
 3. Copie o link e envie manualmente. Não há envio automático de e-mail implementado.
 4. O convidado cria sua conta, confirma o e-mail e abre o link autenticado com o mesmo endereço. O convite expira em sete dias e só pode ser aceito uma vez.
-5. Em Modelos de diário, crie perguntas/categorias ou carregue uma versão. Referências globais VELO são copiadas para a empresa, sem modificar o original.
+5. Em Modelos de diário, crie perguntas/categorias ou carregue uma versão. Modelos de referência são copiadas para a empresa, sem modificar o original.
 6. Publique a versão. Tipos: texto/observações, Sim/Não, número, data, seleção e checklist; obrigatoriedade e ordenação por pergunta.
 7. Em Ocorrências e ações, atribua um modelo/versão a um líder autorizado na unidade, com período e prazo.
 8. O líder abre Diário de bordo, continua uma atribuição ou inicia um registro espontâneo, salva rascunho ou finaliza.
@@ -135,7 +135,7 @@ PGlite não substitui homologação com Supabase Auth e PostgREST reais. Nenhum 
 - Recuperação de senha e envio automático de convites.
 - Auditoria de todos os cadastros e métricas de atividades por tipo de pergunta.
 
-Os três modelos originais VELO e seus campos específicos foram preservados. As categorias de indicadores dos formulários semanais e mensais foram incorporadas às versões sem inventar novos itens.
+Os três modelos de diário de bordo e seus campos específicos foram preservados. As categorias de indicadores dos formulários semanais e mensais foram incorporadas às versões sem inventar novos itens.
 
 ## Resultado nesta entrega
 

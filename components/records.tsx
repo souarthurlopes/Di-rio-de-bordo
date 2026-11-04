@@ -165,8 +165,8 @@ export function Records({
       <section className="card stack">
         <h2>Registros e preenchimento</h2>
         <p className="muted">
-          Os modelos VELO originais permanecem disponíveis. A lista inclui até
-          500 registros autorizados da empresa selecionada.
+          Os modelos de diário de bordo permanecem disponíveis. A lista inclui
+          até 500 registros autorizados da empresa selecionada.
         </p>
         {saved && (
           <div className="alert" role="status">
