@@ -150,3 +150,7 @@ Importe esse repositório na Vercel, com framework Next.js e Root Directory na r
 Configure NEXT_PUBLIC_SUPABASE_URL e NEXT_PUBLIC_SUPABASE_ANON_KEY em Settings → Environment Variables para Production e Preview. Depois faça Redeploy para incorporar as variáveis públicas ao bundle. Sem essas variáveis, o site exibe Configuração pendente; o deploy não cria banco ou contas automaticamente.
 
 Mantenha as variáveis .env.local fora do Git. Mudanças enviadas à branch main poderão gerar deploys automáticos pela integração Git da Vercel.
+
+## Interface e preenchimento por etapas
+
+A demonstração usa organização visual inspirada no Trilha Apostólica, mantendo identidade e conteúdo próprios. O preenchimento segue seleção de modelo → categorias → revisão → finalização. Respostas Sim/Não usam botões; rascunhos e modelos personalizados continuam temporários. Registros finalizados permanecem somente para consulta na sessão.
