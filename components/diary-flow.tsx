@@ -22,7 +22,7 @@ type Props = {
   existing: boolean;
   onChoose: (id: string) => void;
   onChange: (id: string, value: unknown) => void;
-  onSave: (complete: boolean) => void;
+  onSave: (complete: boolean) => string | void;
   onNew: () => void;
 };
 const cadence: Record<string, string> = {
@@ -393,7 +393,13 @@ export function DiaryFlow({
                 <ArrowRight size={15} />
               </button>
             ) : !locked ? (
-              <button className="btn" onClick={() => onSave(true)}>
+              <button
+                className="btn"
+                onClick={() => {
+                  const problem = onSave(true);
+                  if (problem) setError(problem);
+                }}
+              >
                 <CheckCircle2 size={15} /> Finalizar diário
               </button>
             ) : (

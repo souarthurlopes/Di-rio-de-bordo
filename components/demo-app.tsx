@@ -83,7 +83,7 @@ export default function DemoApp() {
     const err = complete ? validateDemo(model.fields, values) : "";
     if (err) {
       setMessage(err);
-      return;
+      return err;
     }
     const id = recordId || crypto.randomUUID();
     const item = {
