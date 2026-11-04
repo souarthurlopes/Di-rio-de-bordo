@@ -1,4 +1,4 @@
--- Migração 002: execute APÓS schema.sql e seed_velo.sql.
+-- Migração 002: execute APÓS schema.sql e seed_diarios.sql.
 -- Multiempresa, gestão de líderes, convites e permissões por unidade.
 create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,

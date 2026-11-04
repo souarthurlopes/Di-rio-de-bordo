@@ -18,7 +18,7 @@ grant execute on all functions in schema auth to authenticated,anon;
 `);
 for (const name of [
   "schema.sql",
-  "seed_velo.sql",
+  "seed_diarios.sql",
   "002_gestora_multiempresa.sql",
 ]) {
   const sql = (

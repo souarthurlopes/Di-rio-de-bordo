@@ -13,7 +13,7 @@ import {
   ChevronRight,
   CheckCircle2,
 } from "lucide-react";
-import originals from "../lib/demo-versions.json";
+import originals from "../lib/diary-models.json";
 import { type Field } from "../lib/domain";
 import { DiaryFlow } from "./diary-flow";
 import { Clients } from "./clients";

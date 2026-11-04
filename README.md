@@ -1,3 +1,11 @@
+# Diário de Bordo
+
+## Versão atual: somente os formulários
+
+A página inicial apresenta apenas os formulários originais diário, semanal e mensal, com checklists e campos de texto e indicadores. Não há marca de empresa, painel, cadastros, construtor, login ou banco. O preenchimento é temporário e pode ser impresso ou salvo em PDF pelo navegador. As três frequências mantêm suas respostas separadas enquanto a aba estiver aberta.
+
+O código de desenvolvimento anterior foi preservado no repositório para referência; ele não é exibido pela página inicial. As instruções abaixo registram etapas anteriores do projeto.
+
 # Diário de Bordo — v0.3
 
 ## Modo demonstração sem banco (padrão)
@@ -33,11 +41,11 @@ Preencha URL e chave pública anon/publishable do Supabase em .env.local. Nunca 
 Em um projeto Supabase **novo**, execute no SQL Editor, nesta ordem:
 
 1. supabase/schema.sql
-2. supabase/seed_velo.sql (uma vez; o seed original não é idempotente)
+2. supabase/seed_diarios.sql (uma vez; o seed original não é idempotente)
 3. supabase/002_gestora_multiempresa.sql
 4. supabase/003_versions_security.sql
 
-Se a v0.2 já estiver instalada, faça backup e aplique **somente 003_versions_security.sql** em homologação antes de produção. Não execute novamente schema.sql ou seed_velo.sql. A migration 003 é transacional e deve ser aplicada uma única vez.
+Se a v0.2 já estiver instalada, faça backup e aplique **somente 003_versions_security.sql** em homologação antes de produção. Não execute novamente schema.sql ou seed_diarios.sql. A migration 003 é transacional e deve ser aplicada uma única vez.
 
 Ela preserva empresas, vínculos, unidades, modelos e respostas existentes. As respostas antigas são copiadas de details/entry_answers para entries.responses e ligadas à primeira versão imutável. Os dados de origem são mantidos para conferência. Históricos sem prazo permanecem sem prazo — não recebem atraso fictício. O cliente v0.2 deixa de salvar após 003, pois as gravações passam exclusivamente pelas RPCs; publique o cliente v0.3 junto com a migration.
 

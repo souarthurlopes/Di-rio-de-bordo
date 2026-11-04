@@ -1,6 +1,6 @@
 # Diário de Bordo — painel multiempresa (versão 0.2)
 
-Sistema web independente, pensado inicialmente para ajudar uma gestora a digitalizar o **Diário de Bordo do Líder VELO BH — Pampulha**. A arquitetura permite múltiplas empresas isoladas; a gestora precisa ter vínculo de administrador com cada empresa que acompanha. **Esta entrega não é ainda um SaaS comercial pronto para produção.**
+Sistema web independente, pensado inicialmente para ajudar uma gestora a digitalizar o **Diário de Bordo do Líder Cliente de exemplo — Pampulha**. A arquitetura permite múltiplas empresas isoladas; a gestora precisa ter vínculo de administrador com cada empresa que acompanha. **Esta entrega não é ainda um SaaS comercial pronto para produção.**
 
 ## Incluído
 
@@ -22,7 +22,7 @@ Sistema web independente, pensado inicialmente para ajudar uma gestora a digital
 
 1. Instale Node.js 20 ou superior.
 2. Crie um projeto gratuito no [Supabase](https://supabase.com/).
-3. Abra o **SQL Editor** e execute, nesta ordem, `supabase/schema.sql`, `supabase/seed_velo.sql` e `supabase/002_gestora_multiempresa.sql`. Se já executou os dois primeiros arquivos antes, execute **somente** a migração `002_gestora_multiempresa.sql`.
+3. Abra o **SQL Editor** e execute, nesta ordem, `supabase/schema.sql`, `supabase/seed_diarios.sql` e `supabase/002_gestora_multiempresa.sql`. Se já executou os dois primeiros arquivos antes, execute **somente** a migração `002_gestora_multiempresa.sql`.
 4. Em **Authentication > Providers**, habilite e-mail/senha. Para teste, confirme os e-mails via mensagem; caso desative a confirmação, faça isso somente em ambiente de desenvolvimento.
 5. Copie `.env.example` para `.env.local`. Insira a URL e a **chave pública anon/publishable** de seu projeto. **Nunca coloque service_role ou secret key no NEXT_PUBLIC_**.
 6. Execute `npm install` e `npm run dev`.
@@ -35,7 +35,7 @@ Sistema web independente, pensado inicialmente para ajudar uma gestora a digital
 - `lib/supabase.ts`: cliente público Supabase.
 - `lib/types.ts`: tipos, períodos e datas.
 - `supabase/schema.sql`: tabelas, segurança, funções e regras.
-- `supabase/seed_velo.sql`: três modelos VELO completos.
+- `supabase/seed_diarios.sql`: três modelos diário de bordo completos.
 
 ## Limites e próximos passos
 
@@ -43,7 +43,7 @@ Sistema web independente, pensado inicialmente para ajudar uma gestora a digital
 
 O painel central agrega no máximo **300 registros recentes** das empresas autorizadas: as contagens de rascunhos/finalizados são apenas dessa amostra, não uma taxa global de adesão. O histórico local mostra até 15 registros da unidade. Cada usuário pode editar apenas os próprios rascunhos, mas membros da mesma empresa podem visualizar os registros da unidade. **Agora há convites por link. O sistema **não envia e-mails automaticamente**: é necessário copiar e encaminhar o link. A conta convidada deve entrar com o e-mail exato do convite.**
 
-Antes de publicar para uso real: testar as políticas RLS com contas de empresas distintas; adicionar gestão/convites de usuários, controle de unidade por usuário, testes de integração, recuperação de senha, proteção contra abuso, política de privacidade e conformidade LGPD. O modelo VELO foi inserido como modelo de referência global; futuramente deve ser copiável/editável por empresa e substituído por modelos genéricos quando necessário.
+Antes de publicar para uso real: testar as políticas RLS com contas de empresas distintas; adicionar gestão/convites de usuários, controle de unidade por usuário, testes de integração, recuperação de senha, proteção contra abuso, política de privacidade e conformidade LGPD. O modelo diário de bordo foi inserido como modelo de referência global; futuramente deve ser copiável/editável por empresa e substituído por modelos genéricos quando necessário.
 
 ## Próxima entrega sugerida
 
@@ -57,7 +57,7 @@ Personalização dos modelos por empresa, agendamento e medição de diários es
 4. No **Painel da gestora**, consulta os registros de todas as empresas em que tiver papel de responsável ou gestora.
 5. Em **Diário de bordo**, os líderes preenchem as verificações do modelo disponível.
 
-**Atenção:** a versão 0.2 ainda usa os modelos VELO como modelos globais de demonstração. Portanto, **não é adequado aplicar esses formulários em outras empresas sem customizá-los**. Os modelos por empresa e o cadastro de verificações são a próxima implementação.
+**Atenção:** a versão 0.2 ainda usa os modelos diário de bordo como modelos globais de demonstração. Portanto, **não é adequado aplicar esses formulários em outras empresas sem customizá-los**. Os modelos por empresa e o cadastro de verificações são a próxima implementação.
 
 ## Segurança e limitações da versão 0.2
 

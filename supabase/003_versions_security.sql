@@ -1,4 +1,4 @@
--- Apply after schema.sql, seed_velo.sql and 002_gestora_multiempresa.sql.
+-- Apply after schema.sql, seed_diarios.sql and 002_gestora_multiempresa.sql.
 begin;
 create table public.platform_managers(user_id uuid primary key references auth.users(id) on delete cascade);
 alter table public.platform_managers enable row level security;

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 export const metadata: Metadata = {
-  title: "Diário de Bordo | Gestão",
-  description: "Diários de bordo e acompanhamentos de equipe",
+  title: "Diário de Bordo",
+  description:
+    "Formulários diário, semanal e mensal de acompanhamento do líder",
 };
 export default function RootLayout({
   children,
