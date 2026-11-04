@@ -1,5 +1,17 @@
 # Diário de Bordo — v0.3
 
+## Modo demonstração sem banco (padrão)
+
+A página inicial agora abre diretamente a demonstração, sem conta, login, variáveis de ambiente ou Supabase. Ela permite navegar, preencher os três formulários VELO, criar modelos temporários, simular empresas/unidades/líderes/ocorrências e consultar rascunhos ou registros finalizados da sessão.
+
+**Os dados ficam apenas em memória e desaparecem ao atualizar ou fechar a aba.** Não há localStorage, gravação no servidor, envio de convites, autenticação ou compartilhamento entre aparelhos. Use somente informações de teste. A interface identifica claramente esse modo.
+
+Para publicar a demonstração na Vercel: importe este repositório como Next.js, raiz do repositório, Node 24, npm ci e npm run build. Nenhuma variável é necessária. Se NEXT_PUBLIC_APP_MODE estiver configurada como connected, remova-a ou mude para demo e faça Redeploy.
+
+O código anterior com banco e suas migrations foi preservado em components/connected-app.tsx. Só é ativado explicitamente com NEXT_PUBLIC_APP_MODE=connected e as variáveis do Supabase. As seções de configuração de banco abaixo são opcionais e não se aplicam à demonstração.
+
+
+
 Continuação do projeto enviado em diario-de-bordo-saas-v02.zip. Este repositório contém o sistema completo. Use sua raiz como Root Directory na Vercel. O README original está em README-v02-original.md.
 
 Plataforma independente: VELO Pampulha é uma referência de formulário, não a marca do produto.

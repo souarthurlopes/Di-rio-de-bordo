@@ -1,0 +1,463 @@
+[
+  {
+    "id": "a9a11dde-083d-4c37-95b3-ed3e8649fed4",
+    "template_id": "29cf3f81-4723-48ef-980f-242e79f8e432",
+    "company_id": null,
+    "version": 1,
+    "template_name": "VELO • Acompanhamento diário",
+    "description": "",
+    "frequency": "daily",
+    "fields": [
+      {
+        "id": "816e4c8e-eae6-41f4-b07b-094eabe898c8",
+        "type": "boolean",
+        "label": "Conferir presença da equipe, cobertura das escalas e necessidade de freelancer.",
+        "options": [],
+        "category": "Pessoas e atendimento",
+        "required": false
+      },
+      {
+        "id": "d7ea2050-0603-45ed-984b-2323a9d42897",
+        "type": "boolean",
+        "label": "Acompanhar recepção, check-ins, cadastros e qualidade do atendimento.",
+        "options": [],
+        "category": "Pessoas e atendimento",
+        "required": false
+      },
+      {
+        "id": "0c973ae0-0621-4d58-b806-a385f510308d",
+        "type": "boolean",
+        "label": "Orientar equipe, mediar intercorrências e registrar feedbacks relevantes.",
+        "options": [],
+        "category": "Pessoas e atendimento",
+        "required": false
+      },
+      {
+        "id": "08b75b71-9ce2-4450-aca3-ce65eef53c62",
+        "type": "boolean",
+        "label": "Verificar demandas críticas dos alunos, reclamações e ações de retenção.",
+        "options": [],
+        "category": "Pessoas e atendimento",
+        "required": false
+      },
+      {
+        "id": "f7af1db3-00dd-46e5-9b8c-f2c9cd7abd79",
+        "type": "boolean",
+        "label": "Verificar funcionamento das salas, organização e limpeza da unidade.",
+        "options": [],
+        "category": "Operação e estrutura",
+        "required": false
+      },
+      {
+        "id": "5a33d034-b4a1-4b24-81bb-adf8111c0503",
+        "type": "boolean",
+        "label": "Acompanhar manutenção, materiais, estoque e saída de produtos.",
+        "options": [],
+        "category": "Operação e estrutura",
+        "required": false
+      },
+      {
+        "id": "2e680433-c8ec-4961-a4f3-71d00291d0a5",
+        "type": "boolean",
+        "label": "Conferir ocorrências operacionais, caixa e demandas urgentes.",
+        "options": [],
+        "category": "Operação e estrutura",
+        "required": false
+      },
+      {
+        "id": "a54b431c-1582-4848-8dfd-52ca8dc86863",
+        "type": "boolean",
+        "label": "Garantir cumprimento dos processos internos e do padrão VELO.",
+        "options": [],
+        "category": "Operação e estrutura",
+        "required": false
+      },
+      {
+        "id": "fa0b2709-ad58-4979-a7bb-fc8be9167de4",
+        "type": "boolean",
+        "label": "Acompanhar vendas, atendimentos e metas do dia.",
+        "options": [],
+        "category": "Comercial e indicadores",
+        "required": false
+      },
+      {
+        "id": "3af763fe-ab66-4c52-98cf-2ec39af5e8c7",
+        "type": "boolean",
+        "label": "Atualizar painel / dashboard e identificar desvios.",
+        "options": [],
+        "category": "Comercial e indicadores",
+        "required": false
+      },
+      {
+        "id": "45798fee-d53f-459a-a531-0638dd77139c",
+        "type": "boolean",
+        "label": "Acompanhar campanhas e oportunidades de retenção.",
+        "options": [],
+        "category": "Comercial e indicadores",
+        "required": false
+      },
+      {
+        "id": "shift",
+        "type": "text",
+        "label": "Turno / horário",
+        "options": [],
+        "category": "Comercial e indicadores",
+        "required": false
+      },
+      {
+        "id": "sales",
+        "type": "number",
+        "label": "Vendas",
+        "options": [],
+        "category": "Comercial e indicadores",
+        "required": false
+      },
+      {
+        "id": "goal",
+        "type": "number",
+        "label": "Meta",
+        "options": [],
+        "category": "Comercial e indicadores",
+        "required": false
+      },
+      {
+        "id": "visits",
+        "type": "number",
+        "label": "Atendimentos",
+        "options": [],
+        "category": "Comercial e indicadores",
+        "required": false
+      },
+      {
+        "id": "complaints",
+        "type": "number",
+        "label": "Reclamações",
+        "options": [],
+        "category": "Comercial e indicadores",
+        "required": false
+      },
+      {
+        "id": "occurrences",
+        "type": "text",
+        "label": "Ocorrências, ações, responsáveis e prazos",
+        "options": [],
+        "category": "Comercial e indicadores",
+        "required": false
+      },
+      {
+        "id": "pending",
+        "type": "text",
+        "label": "Pendências para o dia seguinte",
+        "options": [],
+        "category": "Comercial e indicadores",
+        "required": false
+      }
+    ],
+    "created_at": "2026-11-03T16:26:29.533Z",
+    "templates": {
+      "name": "VELO • Acompanhamento diário"
+    }
+  },
+  {
+    "id": "3112cb1e-1453-4c4b-bac5-858496ddff88",
+    "template_id": "1170b0d0-c27c-41b7-8e63-4560bd3edb85",
+    "company_id": null,
+    "version": 1,
+    "template_name": "VELO • Fechamento mensal",
+    "description": "",
+    "frequency": "monthly",
+    "fields": [
+      {
+        "id": "9a147751-920a-4ddb-9996-c1feed377ed7",
+        "type": "boolean",
+        "label": "Avaliar indicadores individuais, desempenho e evolução dos colaboradores.",
+        "options": [],
+        "category": "Pessoas e processos",
+        "required": false
+      },
+      {
+        "id": "2fc8f72b-bc81-4da2-9cd7-bf2d96c7dd32",
+        "type": "boolean",
+        "label": "Revisar necessidades de treinamento, integração e desenvolvimento.",
+        "options": [],
+        "category": "Pessoas e processos",
+        "required": false
+      },
+      {
+        "id": "a3a2f390-22fb-4152-9317-7a755482b2c1",
+        "type": "boolean",
+        "label": "Consolidar ausências, escalas, férias e demandas de cobertura.",
+        "options": [],
+        "category": "Pessoas e processos",
+        "required": false
+      },
+      {
+        "id": "9bf3faf2-15ff-4d7a-948e-a8c0cbbc6799",
+        "type": "boolean",
+        "label": "Avaliar adesão aos processos e oportunidades de padronização.",
+        "options": [],
+        "category": "Pessoas e processos",
+        "required": false
+      },
+      {
+        "id": "11b7fe61-5d65-4934-870b-02587878529e",
+        "type": "boolean",
+        "label": "Realizar inventário e revisar estoque, compras e fornecedores.",
+        "options": [],
+        "category": "Operação, compras e infraestrutura",
+        "required": false
+      },
+      {
+        "id": "81afe265-4d9a-4112-9625-ca4a8a294fab",
+        "type": "boolean",
+        "label": "Avaliar manutenções, ocorrências recorrentes e melhorias estruturais.",
+        "options": [],
+        "category": "Operação, compras e infraestrutura",
+        "required": false
+      },
+      {
+        "id": "d9b57e92-245f-40e7-8e20-53bff9b72a8b",
+        "type": "boolean",
+        "label": "Revisar execução de eventos e ações comemorativas, quando houver.",
+        "options": [],
+        "category": "Operação, compras e infraestrutura",
+        "required": false
+      },
+      {
+        "id": "fbbd096e-32d9-466a-9611-499b9371ae6a",
+        "type": "boolean",
+        "label": "Consolidar metas, vendas, indicadores e relatórios do mês.",
+        "options": [],
+        "category": "Resultados e experiência",
+        "required": false
+      },
+      {
+        "id": "3b3e7101-4477-4942-87a8-98c194580916",
+        "type": "boolean",
+        "label": "Analisar reclamações, feedbacks e ações de retenção de alunos.",
+        "options": [],
+        "category": "Resultados e experiência",
+        "required": false
+      },
+      {
+        "id": "7e455978-7be3-4ca1-9b3c-129b677baf65",
+        "type": "boolean",
+        "label": "Apresentar resultados e propostas de melhoria aos sócios.",
+        "options": [],
+        "category": "Resultados e experiência",
+        "required": false
+      },
+      {
+        "id": "sales",
+        "type": "text",
+        "label": "Vendas: meta / resultado / observações",
+        "options": [],
+        "category": "Indicadores e prioridades do próximo mês",
+        "required": false
+      },
+      {
+        "id": "visits",
+        "type": "text",
+        "label": "Atendimentos: meta / resultado / observações",
+        "options": [],
+        "category": "Indicadores e prioridades do próximo mês",
+        "required": false
+      },
+      {
+        "id": "retention",
+        "type": "text",
+        "label": "Retenção: meta / resultado / observações",
+        "options": [],
+        "category": "Indicadores e prioridades do próximo mês",
+        "required": false
+      },
+      {
+        "id": "team",
+        "type": "text",
+        "label": "Desempenho da equipe: meta / resultado / observações",
+        "options": [],
+        "category": "Indicadores e prioridades do próximo mês",
+        "required": false
+      },
+      {
+        "id": "wins",
+        "type": "text",
+        "label": "Principais conquistas",
+        "options": [],
+        "category": "Indicadores e prioridades do próximo mês",
+        "required": false
+      },
+      {
+        "id": "risks",
+        "type": "text",
+        "label": "Desafios / riscos",
+        "options": [],
+        "category": "Indicadores e prioridades do próximo mês",
+        "required": false
+      },
+      {
+        "id": "decisions",
+        "type": "text",
+        "label": "Decisões necessárias dos sócios",
+        "options": [],
+        "category": "Indicadores e prioridades do próximo mês",
+        "required": false
+      },
+      {
+        "id": "priorities",
+        "type": "text",
+        "label": "Prioridades do próximo mês (ação, responsável e prazo)",
+        "options": [],
+        "category": "Indicadores e prioridades do próximo mês",
+        "required": false
+      }
+    ],
+    "created_at": "2026-11-03T16:26:29.533Z",
+    "templates": {
+      "name": "VELO • Fechamento mensal"
+    }
+  },
+  {
+    "id": "6363c005-4d0b-49cf-9d10-6c5ac8c154d6",
+    "template_id": "f92b373c-0c15-4fb8-8dfc-f253ab9b7be8",
+    "company_id": null,
+    "version": 1,
+    "template_name": "VELO • Acompanhamento semanal",
+    "description": "",
+    "frequency": "weekly",
+    "fields": [
+      {
+        "id": "2c702d53-7629-4cc1-88f8-d03ccf545546",
+        "type": "boolean",
+        "label": "Realizar reunião semanal de alinhamento e encontros individuais (1:1).",
+        "options": [],
+        "category": "Gestão de pessoas",
+        "required": false
+      },
+      {
+        "id": "79146651-589a-41de-be05-447e82f7617c",
+        "type": "boolean",
+        "label": "Acompanhar desempenho, feedbacks, integração e desenvolvimento da equipe.",
+        "options": [],
+        "category": "Gestão de pessoas",
+        "required": false
+      },
+      {
+        "id": "ecf866ab-b967-47e9-8f43-86a360a9a5e7",
+        "type": "boolean",
+        "label": "Revisar escalas, folgas, férias e programação de freelancers com os sócios.",
+        "options": [],
+        "category": "Gestão de pessoas",
+        "required": false
+      },
+      {
+        "id": "0db69dba-38de-461d-a521-cd996946cbb5",
+        "type": "boolean",
+        "label": "Verificar conflitos, medidas disciplinares e andamento do apadrinhamento.",
+        "options": [],
+        "category": "Gestão de pessoas",
+        "required": false
+      },
+      {
+        "id": "aea256b9-7afa-4991-8fb7-0a41a09c0882",
+        "type": "boolean",
+        "label": "Revisar ocorrências e manutenção preventiva / corretiva.",
+        "options": [],
+        "category": "Operação, infraestrutura e compras",
+        "required": false
+      },
+      {
+        "id": "61e057d5-12dd-459d-a75c-7755ccc6adca",
+        "type": "boolean",
+        "label": "Verificar estoque, necessidades de compra e fornecedores.",
+        "options": [],
+        "category": "Operação, infraestrutura e compras",
+        "required": false
+      },
+      {
+        "id": "47129754-3e87-46b2-9bf3-2df4e844a969",
+        "type": "boolean",
+        "label": "Conferir controles de caixa, materiais e funcionamento das salas.",
+        "options": [],
+        "category": "Operação, infraestrutura e compras",
+        "required": false
+      },
+      {
+        "id": "97da49fa-8b71-4487-94dc-568d59fb63d8",
+        "type": "boolean",
+        "label": "Consolidar vendas, metas, atendimentos e indicadores da semana.",
+        "options": [],
+        "category": "Comercial, experiência e comunicação",
+        "required": false
+      },
+      {
+        "id": "478a6373-d67e-4de1-a818-a4bf9a75a7db",
+        "type": "boolean",
+        "label": "Avaliar reclamações, retenção e qualidade da experiência dos alunos.",
+        "options": [],
+        "category": "Comercial, experiência e comunicação",
+        "required": false
+      },
+      {
+        "id": "ca994f91-c7d1-4c56-9a26-a9773096887b",
+        "type": "boolean",
+        "label": "Acompanhar campanhas, eventos e ações de marketing previstas.",
+        "options": [],
+        "category": "Comercial, experiência e comunicação",
+        "required": false
+      },
+      {
+        "id": "ffa4703a-9c2f-4c0d-9fd6-b3bea54db849",
+        "type": "boolean",
+        "label": "Reportar resultados, riscos e decisões necessárias aos sócios.",
+        "options": [],
+        "category": "Comercial, experiência e comunicação",
+        "required": false
+      },
+      {
+        "id": "sales",
+        "type": "text",
+        "label": "Vendas: meta / realizado / ação",
+        "options": [],
+        "category": "Indicadores e plano de ação",
+        "required": false
+      },
+      {
+        "id": "visits",
+        "type": "text",
+        "label": "Atendimentos: meta / realizado / ação",
+        "options": [],
+        "category": "Indicadores e plano de ação",
+        "required": false
+      },
+      {
+        "id": "retention",
+        "type": "text",
+        "label": "Retenção: meta / realizado / ação",
+        "options": [],
+        "category": "Indicadores e plano de ação",
+        "required": false
+      },
+      {
+        "id": "occurrences",
+        "type": "text",
+        "label": "Ocorrências: meta / realizado / ação",
+        "options": [],
+        "category": "Indicadores e plano de ação",
+        "required": false
+      },
+      {
+        "id": "plan",
+        "type": "text",
+        "label": "Plano de ação (prioridade, responsável, prazo e status)",
+        "options": [],
+        "category": "Indicadores e plano de ação",
+        "required": false
+      }
+    ],
+    "created_at": "2026-11-03T16:26:29.533Z",
+    "templates": {
+      "name": "VELO • Acompanhamento semanal"
+    }
+  }
+]
