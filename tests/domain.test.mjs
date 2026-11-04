@@ -56,3 +56,41 @@ test("demonstração rejeita seleção fora das opções", () => {
   assert.ok(validateDemo(fields, { s: "C" }));
   assert.equal(validateDemo(fields, { s: "A" }), "");
 });
+
+const { normalizeEmail, validateClient } = await import("../lib/clients.ts");
+test("cliente exige pessoa com nome e e-mail válidos", () => {
+  const p = {
+    id: "1",
+    name: "Ana",
+    email: " ANA@EXEMPLO.COM ",
+    role: "leader",
+    unit: "",
+  };
+  assert.equal(normalizeEmail(p.email), "ana@exemplo.com");
+  assert.equal(validateClient("Cliente A", [p]), "");
+  assert.ok(validateClient("Cliente A", []));
+  assert.ok(validateClient("Cliente A", [{ ...p, email: "invalido" }]));
+  assert.ok(validateClient("Cliente A", [{ ...p, name: "" }]));
+});
+test("cliente rejeita e-mails repetidos após normalização", () => {
+  const p = {
+    id: "1",
+    name: "Ana",
+    email: "ana@exemplo.com",
+    role: "leader",
+    unit: "",
+  };
+  assert.ok(
+    validateClient("Cliente A", [
+      p,
+      { ...p, id: "2", email: " ANA@EXEMPLO.COM " },
+    ]),
+  );
+  assert.equal(
+    validateClient("Cliente A", [
+      p,
+      { ...p, id: "2", email: "outra@exemplo.com", role: "employee" },
+    ]),
+    "",
+  );
+});

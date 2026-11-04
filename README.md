@@ -154,3 +154,9 @@ Mantenha as variáveis .env.local fora do Git. Mudanças enviadas à branch main
 ## Interface e preenchimento por etapas
 
 A demonstração usa organização visual inspirada no Trilha Apostólica, mantendo identidade e conteúdo próprios. O preenchimento segue seleção de modelo → categorias → revisão → finalização. Respostas Sim/Não usam botões; rascunhos e modelos personalizados continuam temporários. Registros finalizados permanecem somente para consulta na sessão.
+
+## Cadastro unificado de clientes
+
+A demonstração reúne empresas e pessoas na tela Clientes. Ao cadastrar um cliente, adicione líderes e funcionários no mesmo formulário, com nome, e-mail obrigatório, função e unidade/equipe opcional. O cadastro pode ser editado e não aceita e-mails repetidos dentro do mesmo cliente.
+
+Antes do preenchimento, selecione o cliente e a pessoa responsável. O registro guarda uma cópia do nome e e-mail da pessoa para manter sua identificação mesmo após edições cadastrais. Na demonstração, esses vínculos não criam usuários, convites ou acesso privado. Autenticação real continua fora do escopo desta versão sem banco.

@@ -16,6 +16,8 @@ import {
 import originals from "../lib/demo-versions.json";
 import { type Field } from "../lib/domain";
 import { DiaryFlow } from "./diary-flow";
+import { Clients } from "./clients";
+import type { Client } from "../lib/clients";
 import { validateDemo } from "../lib/demo";
 type Model = { id: string; name: string; frequency: string; fields: Field[] };
 type RecordItem = {
@@ -24,8 +26,12 @@ type RecordItem = {
   values: Record<string, unknown>;
   complete: boolean;
   date: string;
+  clientId: string;
+  personId: string;
+  clientName: string;
+  personName: string;
+  personEmail: string;
 };
-type Company = { id: string; name: string; units: string[] };
 type Incident = {
   id: string;
   description: string;
@@ -43,18 +49,14 @@ const screens = [
   { id: "dashboard", name: "Visão geral", icon: LayoutDashboard },
   { id: "diary", name: "Diários de bordo", icon: ClipboardCheck },
   { id: "history", name: "Registros", icon: BookOpen },
-  { id: "companies", name: "Empresas e unidades", icon: Building2 },
-  { id: "team", name: "Líderes", icon: Users },
+  { id: "clients", name: "Clientes", icon: Building2 },
   { id: "models", name: "Modelos de diário", icon: Plus },
   { id: "incidents", name: "Ocorrências", icon: TriangleAlert },
 ];
 export default function DemoApp() {
   const [flowKey, setFlowKey] = useState(0);
   const [view, setView] = useState("dashboard"),
-    [companies, setCompanies] = useState<Company[]>([]),
-    [people, setPeople] = useState<
-      { name: string; company: string; unit: string }[]
-    >([]),
+    [clients, setClients] = useState<Client[]>([]),
     [models, setModels] = useState(baseModels),
     [records, setRecords] = useState<RecordItem[]>([]),
     [incidents, setIncidents] = useState<Incident[]>([]);
@@ -65,6 +67,11 @@ export default function DemoApp() {
   const [fields, setFields] = useState<Field[]>([]),
     [modelName, setModelName] = useState(""),
     [frequency, setFrequency] = useState("daily");
+  const [assignedClient, setAssignedClient] = useState(""),
+    [assignedPerson, setAssignedPerson] = useState(""),
+    [assignmentReady, setAssignmentReady] = useState(false);
+  const client = clients.find((c) => c.id === assignedClient),
+    person = client?.people.find((p) => p.id === assignedPerson);
   const model = models.find((m) => m.id === modelId) ?? models[0],
     current = records.find((r) => r.id === recordId),
     locked = Boolean(current?.complete);
@@ -73,6 +80,7 @@ export default function DemoApp() {
     setMessage("");
   }
   function start() {
+    setAssignmentReady(false);
     setFlowKey((n) => n + 1);
     setRecordId("");
     setValues({});
@@ -80,6 +88,11 @@ export default function DemoApp() {
   }
   function save(complete: boolean) {
     if (locked) return;
+    if (!client || !person) {
+      const error = "Selecione o cliente e a pessoa responsável.";
+      setMessage(error);
+      return error;
+    }
     const err = complete ? validateDemo(model.fields, values) : "";
     if (err) {
       setMessage(err);
@@ -92,6 +105,11 @@ export default function DemoApp() {
       values: structuredClone(values),
       complete,
       date: new Date().toLocaleString("pt-BR"),
+      clientId: client.id,
+      personId: person.id,
+      clientName: client.name,
+      personName: person.name,
+      personEmail: person.email,
     };
     setRecords((a) => [item, ...a.filter((r) => r.id !== id)]);
     setRecordId(id);
@@ -102,6 +120,9 @@ export default function DemoApp() {
     );
   }
   function open(r: RecordItem) {
+    setAssignedClient(r.clientId);
+    setAssignedPerson(r.personId);
+    setAssignmentReady(true);
     setFlowKey((n) => n + 1);
     setModelId(r.model.id);
     setRecordId(r.id);
@@ -205,8 +226,15 @@ export default function DemoApp() {
               </section>
               <div className="overview-stats">
                 {[
-                  [Building2, "Empresas", companies.length, "No seu espaço"],
-                  [Users, "Líderes", people.length, "Adicionados nesta sessão"],
+                  [Building2, "Clientes", clients.length, "No seu espaço"],
+                  [
+                    Users,
+                    "Pessoas",
+                    new Set(
+                      clients.flatMap((c) => c.people.map((p) => p.email)),
+                    ).size,
+                    "Vinculadas aos clientes",
+                  ],
                   [
                     CheckCircle2,
                     "Concluídos",
@@ -281,11 +309,11 @@ export default function DemoApp() {
                   {[
                     [
                       Building2,
-                      "Empresas e unidades",
-                      "Organize quem você acompanha.",
-                      "companies",
+                      "Clientes e pessoas",
+                      "Cadastre todos em um só lugar.",
+                      "clients",
                     ],
-                    [Users, "Líderes", "Tenha sua equipe por perto.", "team"],
+
                     [
                       TriangleAlert,
                       "Ocorrências",
@@ -327,6 +355,7 @@ export default function DemoApp() {
                       <thead>
                         <tr>
                           <th>Diário</th>
+                          <th>Responsável</th>
                           <th>Atualizado em</th>
                           <th>Situação</th>
                           <th></th>
@@ -336,6 +365,12 @@ export default function DemoApp() {
                         {records.slice(0, 5).map((r) => (
                           <tr key={r.id}>
                             <td>{r.model.name.replace("VELO • ", "")}</td>
+                            <td>
+                              {r.personName}
+                              <small className="person-email">
+                                {r.personEmail}
+                              </small>
+                            </td>
                             <td>{r.date}</td>
                             <td>
                               <span className="badge gray">
@@ -367,26 +402,113 @@ export default function DemoApp() {
               </section>
             </div>
           )}
-          {view === "diary" && (
-            <DiaryFlow
-              key={flowKey}
-              models={models}
-              model={activeModel}
-              values={values}
-              locked={locked}
-              existing={Boolean(recordId)}
-              onChoose={(id) => {
-                setModelId(id);
-                setValues({});
-                setRecordId("");
-              }}
-              onChange={(id, value) =>
-                setValues((a) => ({ ...a, [id]: value }))
-              }
-              onSave={save}
-              onNew={start}
-            />
-          )}
+          {view === "diary" &&
+            (!assignmentReady ? (
+              <section className="card stack">
+                <span className="section-kicker">ANTES DE COMEÇAR</span>
+                <h2>Quem vai preencher este diário?</h2>
+                <p className="muted">
+                  Vincule o registro a uma pessoa cadastrada no cliente.
+                </p>
+                {!clients.length ? (
+                  <div className="calm-empty">
+                    <p>
+                      Cadastre um cliente com pelo menos uma pessoa e seu
+                      e-mail.
+                    </p>
+                    <button className="btn" onClick={() => go("clients")}>
+                      Cadastrar cliente
+                    </button>
+                  </div>
+                ) : (
+                  <form
+                    className="stack"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      if (person) {
+                        setAssignmentReady(true);
+                        setMessage("");
+                      }
+                    }}
+                  >
+                    <div className="fields">
+                      <label className="field">
+                        Cliente
+                        <select
+                          required
+                          className="input"
+                          value={assignedClient}
+                          onChange={(e) => {
+                            setAssignedClient(e.target.value);
+                            setAssignedPerson("");
+                          }}
+                        >
+                          <option value="">Selecione</option>
+                          {clients.map((c) => (
+                            <option key={c.id} value={c.id}>
+                              {c.name}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                      <label className="field">
+                        Pessoa responsável
+                        <select
+                          required
+                          className="input"
+                          value={assignedPerson}
+                          onChange={(e) => setAssignedPerson(e.target.value)}
+                        >
+                          <option value="">Selecione</option>
+                          {client?.people.map((p) => (
+                            <option key={p.id} value={p.id}>
+                              {p.name} · {p.email}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                    </div>
+                    {person && (
+                      <p className="muted">
+                        Vinculado a {person.email}. Nesta demonstração, isso não
+                        cria acesso privado.
+                      </p>
+                    )}
+                    <button className="btn" disabled={!person}>
+                      Continuar para o diário <ArrowRight size={14} />
+                    </button>
+                  </form>
+                )}
+              </section>
+            ) : (
+              <div className="stack">
+                <div className="assignment-label">
+                  <span>
+                    <strong>{current?.clientName || client?.name}</strong> ·{" "}
+                    {current?.personName || person?.name}
+                  </span>
+                  <span>{current?.personEmail || person?.email}</span>
+                </div>
+                <DiaryFlow
+                  key={flowKey}
+                  models={models}
+                  model={activeModel}
+                  values={values}
+                  locked={locked}
+                  existing={Boolean(recordId)}
+                  onChoose={(id) => {
+                    setModelId(id);
+                    setValues({});
+                    setRecordId("");
+                  }}
+                  onChange={(id, value) =>
+                    setValues((a) => ({ ...a, [id]: value }))
+                  }
+                  onSave={save}
+                  onNew={start}
+                />
+              </div>
+            ))}
           {view === "history" && (
             <section className="card stack">
               <h2>Histórico desta aba</h2>
@@ -397,7 +519,8 @@ export default function DemoApp() {
               {records.map((r) => (
                 <div className="row spread" key={r.id}>
                   <p>
-                    {r.model.name} · {r.date} ·{" "}
+                    {r.model.name} · {r.clientName} · {r.personName} (
+                    {r.personEmail}) · {r.date} ·{" "}
                     {r.complete ? "Concluído" : "Rascunho"}
                   </p>
                   <button className="btn secondary" onClick={() => open(r)}>
@@ -410,115 +533,19 @@ export default function DemoApp() {
               )}
             </section>
           )}
-          {view === "companies" && (
-            <div className="stack">
-              <section className="card stack">
-                <h2>Cadastrar empresa</h2>
-                <form
-                  className="row"
-                  action={(f) => {
-                    setCompanies((a) => [
-                      ...a,
-                      {
-                        id: crypto.randomUUID(),
-                        name: String(f.get("name")).trim(),
-                        units: [],
-                      },
-                    ]);
-                    setMessage("Empresa adicionada apenas nesta sessão.");
-                  }}
-                >
-                  <label className="field">
-                    Nome
-                    <input
-                      name="name"
-                      required
-                      minLength={2}
-                      className="input"
-                    />
-                  </label>
-                  <button className="btn">Adicionar</button>
-                </form>
-              </section>
-              {companies.map((c) => (
-                <section className="card stack" key={c.id}>
-                  <h2>{c.name}</h2>
-                  <p>{c.units.join(" · ") || "Nenhuma unidade de teste."}</p>
-                  <form
-                    className="row"
-                    action={(f) =>
-                      setCompanies((a) =>
-                        a.map((x) =>
-                          x.id === c.id
-                            ? {
-                                ...x,
-                                units: [
-                                  ...x.units,
-                                  String(f.get("unit")).trim(),
-                                ],
-                              }
-                            : x,
-                        ),
-                      )
-                    }
-                  >
-                    <label className="field">
-                      Nova unidade
-                      <input className="input" required name="unit" />
-                    </label>
-                    <button className="btn secondary">Adicionar unidade</button>
-                  </form>
-                </section>
-              ))}
-              {!companies.length && (
-                <div className="card empty">
-                  Nenhuma empresa cadastrada nesta sessão.
-                </div>
-              )}
-            </div>
-          )}
-          {view === "team" && (
-            <section className="card stack">
-              <h2>Cadastrar líder</h2>
-              <p className="muted">
-                Nenhum convite ou e-mail será enviado. Não há autenticação nem
-                isolamento entre usuários nesta demonstração.
-              </p>
-              <form
-                className="fields"
-                action={(f) => {
-                  setPeople((a) => [
-                    ...a,
-                    {
-                      name: String(f.get("name")),
-                      company: String(f.get("company")),
-                      unit: String(f.get("unit")),
-                    },
-                  ]);
-                  setMessage("Líder de teste adicionado nesta aba.");
-                }}
-              >
-                <label className="field">
-                  Nome
-                  <input className="input" required name="name" />
-                </label>
-                <label className="field">
-                  Empresa (opcional)
-                  <input className="input" name="company" />
-                </label>
-                <label className="field">
-                  Unidade (opcional)
-                  <input className="input" name="unit" />
-                </label>
-                <button className="btn">Adicionar líder</button>
-              </form>
-              {people.map((p, i) => (
-                <p key={i}>
-                  {p.name} · {p.company || "Sem empresa"} ·{" "}
-                  {p.unit || "Sem unidade"}
-                </p>
-              ))}
-            </section>
+          {view === "clients" && (
+            <Clients
+              clients={clients}
+              onSave={(c) => {
+                setClients((a) => [...a.filter((x) => x.id !== c.id), c]);
+                setMessage("Cliente e pessoas salvos nesta sessão.");
+              }}
+              onDiary={(c) => {
+                start();
+                setAssignedClient(c.id);
+                setAssignedPerson(c.people[0]?.id || "");
+              }}
+            />
           )}
           {view === "models" && (
             <section className="card stack">
