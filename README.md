@@ -131,7 +131,7 @@ Instalação, lint sem avisos, TypeScript, seis testes de domínio, 30 verifica�
 
 ## GitHub e deploy automático
 
-Repositório do sistema completo: https://github.com/souarthurlopes/diario-de-bordo
+Repositório do sistema completo: https://github.com/souarthurlopes/Di-rio-de-bordo
 
 Importe esse repositório na Vercel, com framework Next.js e Root Directory na raiz (deixe vazio). Node.js 24.x, instalação npm ci e build npm run build. O projeto não contém .openai/hosting.json nem depende de Sites.
 
